@@ -1,6 +1,6 @@
 #uses TCP/IP protocol
 
-import socket, os, sys
+import socket, os, sys, datetime
 
 #receives temperature from client
 def receiveTemp(serversocket):
@@ -10,6 +10,7 @@ def receiveTemp(serversocket):
         data = conn.recv(1024)
         if len(data) > 0:
             print "Temperature received: {} Celcius".format(data)
+            getTimestamp()
     conn.close()
     serversocket.close()
 
@@ -26,6 +27,14 @@ def receiveImage(serversocket):
         f.close()
         conn.close()
     serversocket.close()
+    
+############################################
+# Functions used for collecting data
+############################################
+
+#includes microseconds
+def getTimestamp():
+    print datetime.datetime.now()
 
 HOST = ''
 PORT = 12345

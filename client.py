@@ -1,4 +1,4 @@
-import socket, os, random, sys
+import socket, os, random, sys, datetime
 
 # generates a random temperature from 0 to 100 Celcius
 def generateTemp():
@@ -13,6 +13,7 @@ def sendTemp(clientsocket):
         if (intTemp > 30):
             clientsocket.sendall(temperature)
             print "Temperature sent: {} Celcius".format(temperature)
+            getTimestamp()
         freq -= 1
     clientsocket.close()
 
@@ -25,7 +26,13 @@ def sendImage(clientsocket):
         clientsocket.send(l)
         l = f.read(1024)
     clientsocket.close()
+    
+############################################
+# Functions used for collecting data
+############################################
 
+def getTimestamp():
+    print datetime.datetime.now()
 
 
 #establish connections with host and port
